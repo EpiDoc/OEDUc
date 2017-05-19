@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns="http://www.w3.org/1999/xhtml" data-template="templates:surround" data-template-with="templates/page.html" data-template-at="content">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="page-header">
+                <h1 data-template="config:app-title">Generated page</h1>
+            </div>
+            </div>
+       
+        <div class="col-md-4">
+            <form action="" class="form form-horizontal">
+                <div class="form-group">
+                    <span class="input-group">
+                        <span data-template="app:queryinput"/>
+                        <span class="input-group-btn">
+                            <button id="f-btn-search" type="submit" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-search"/>
+                            </button>
+                        </span>
+                    </span>
+                </div>
+            </form>
+            <div data-template="app:newentry"/>
+            <p>In the search above you can use Lucene query symbols.</p>
+            
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div data-template="app:query">
+            <div>
+                <div data-template="app:hit-count"/>
+            </div>
+            <div class="container">
+                <!-- query results -->
+                <div data-template="app:searchRes" id="results" class="col-md-12"/>
+            </div>
+            <div class="hidden-xs">
+                <ul class="pagination" data-template="app:paginate"/>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+    <div class="col-md-6 alert alert-info lead">
+        <p>This is a test app built from the exist-db, a natively XML database which uses XQuery . It uses different data sources with
+            different methods to bring together useful resources for an epigraphic corpus. </p>
+        <p>Preliminary twicks to the data included:</p>
+        <ul>
+            <li>adding an xml:id to the text element to speed up retrival of items in exist.</li>
+            <li>note that there is no pleiades id in the xml, but there are trismegistos geo!</li>
+        </ul>
+        
+        <p>The features</p>
+        <ul>
+            <li>In the list view you can select an item. Each item can be edited normally (create,
+                update, delete) </li>
+            <li>The editor that updates files reproduces in simple XSLT a part of the Leiden+ logic and conventions for
+                you to enter data or update existing data. It validates the data <b>after</b>
+                performing the changes against the tei-epidoc.rng schema. Plan is to have it
+                validate before it does the real changes. </li>
+            <li>The search simply searches in a number of elements. It is not a full text index.
+                There are also range indexes set to speed up the queries.</li>
+            <li>You can create a new entry with the leiden plus editor and save it. it will be first validate and in case is not ok you are pointed to the problems. Here I did not yet have times to add the vocabularies and update the editor.</li>
+        </ul>
+        <p> Once you view an item you will find in nasty hugly tables a first section with metadata, the text, some additional information on persons and a map:</p>
+        <ul>
+            <li>The text exploits some of the parameters of the EpiDoc Stylesheets. You can change
+                the desired value, hit change and see the difference. </li>
+            <li>The ids of corresponding inscriptions, pulled from the EAGLE ids api here in
+                Hamburg, using Trismegistos data, which will be soon moved to Trismegistos itself. </li>
+            <li>The EDH id is instead used to query the EDH api and get the information about
+                persons, which is printed below the text. </li>
+            <li>For each element with a @ref in the XML files you will find the name of the element
+                and a link to the value. E.g. to link to the EAGLE vocabularies </li>
+            <li>In case this is a TM Geo ID, then the id is used to query Wikidata SPARQL endpoint and retrive
+                coordinates and the corresponding Pleiades id (given those are there). Same logic
+                could be used for VIAF, geonames, etc. There were uploads of ids last year and an attempt to align the non matched Pleiades and Trismegisots ids was also made in 2015/16. This task is done via a http request directly in the xquery powering the app.</li>
+            <li>The pleiades id thus retrived (which could be certainly retrived in other ways) is then used in javascript to query Pelagios and print the map below
+                (taken from the hello world example in the pelagios repository) </li>
+            <li>at <a href="http://betamasaheft.aai.uni-hamburg.de/api/OEDUc/places/all" target="_blank">http://betamasaheft.aai.uni-hamburg.de/api/OEDUc/places/all</a> and <a href="http://betamasaheft.aai.uni-hamburg.de/api/OEDUc/places/all/void" target="_blank">http://betamasaheft.aai.uni-hamburg.de/api/OEDUc/places/all/void</a> two rest XQ function provide the ttl files for pelagios. the places annotations, at the moment only for the first 20 entries. See rest.xql.</li>
+       
+        </ul>
+    </div>
+    <div class=" col-md-6 alert alert-warning">
+        <p>Beside making it a bit nicer I think it would be usefull if this could also have the following, which I did not manage to do</p>
+        <ul>
+            <li>validate before submitting</li>
+            <li>add more support for parameters in the EpiDoc example xslt (e.g. for Zotero bibliography contained in div[@type='bibliography'])</li>
+            <li>improve the upconversion and the editor with more and more precise matchings</li>
+            <li>provide functionality to use xpath to search the data</li>
+            <li>add advanced search capabilities to filter results by id, content provider, etc. </li>
+            <li>add images support</li>
+            <li>include all EAGLE data (currently only EDH dumps data is in)</li>
+            <li>include query to the EAGLE media wiki of translations (api currently unavailable)</li>
+            <li>show related items based on any of the values</li>
+            <li>include in the editor the possibility to tag named entities</li>
+        </ul>
+    </div>
+    </div>
+   
+</div>
