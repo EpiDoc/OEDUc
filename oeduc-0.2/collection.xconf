@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<collection xmlns="http://exist-db.org/collection-config/1.0">
+    <index xmlns:tei="http://www.tei-c.org/ns/1.0">
+        <!-- Disable the standard full text index -->
+        <fulltext default="none" attributes="no"/>
+        
+        <!-- Range index configuration on the id attribute -->
+        <!-- Most ids are integers but we will keep this general <create qname="id" type="xs:int"/> -->
+        <create qname="id" type="xs:string"/>
+        
+        <!-- Lucene index configuration -->
+        <lucene diacritics="no">
+            <!-- Use the standard analyzer will ignore stopwords like 'the', 'and' -->
+            <analyzer class="org.apache.lucene.analysis.standard.StandardAnalyzer"/>
+            
+            <!-- an index boost can be used to give matches in the
+            name a higher score. This means a name match will have higher rank then
+            an match in the definition. -->
+            <text match="//tei:ab"/>
+            <text match="tei:objectType"/>
+            <text match="tei:rs"/>   
+            <text match="tei:width"/>   
+            <text match="tei:height"/>   
+            <text match="tei:material"/>
+            <text match="tei:placeName"/>   
+            <inline qname="tei:lb"/>
+            <inline qname="tei:choice"/>
+            <inline qname="tei:abbr"/>
+            <inline qname="tei:ex"/>
+            <inline qname="tei:expan"/>
+            <inline qname="tei:choice"/> 
+            <inline qname="tei:sic"/> 
+            <inline qname="tei:corr"/> 
+        </lucene>
+        <range>
+            <create qname="tei:div">
+                <field name="entryN" match="@type" type="xs:string"/>
+                <field name="entryid" match="@xml:id" type="xs:string"/>
+            </create>
+            
+            <create qname="tei:change">
+            <field name="changeWhen" match="@when" type="xs:string"/>
+            <field name="changeWho" match="@who" type="xs:string"/>
+            </create>
+            
+            <create qname="tei:origDate">
+                <field name="notBefore-custom" match="@notBefore-custom" type="xs:string"/>
+                <field name="notAfter-custom" match="@notAfter-custom" type="xs:string"/>
+            </create>
+            
+            <create qname="tei:title" type="xs:string"/>
+            
+            <create qname="tei:rs">
+                <field name="rstype" match="@type" type="xs:string"/>
+                <field name="rsref" match="@ref" type="xs:string"/>
+            </create>
+            
+            <create qname="tei:objectType">
+                <field name="objectTyperef" match="@ref" type="xs:string"/>
+            </create>
+            
+            <create qname="tei:material">
+                <field name="materialref" match="@ref" type="xs:string"/>
+            </create>
+            
+            <create qname="tei:term">
+                <field name="termref" match="@ref" type="xs:string"/>
+            </create>
+            
+            <create qname="tei:placeName">
+                <field name="placetype" match="@type" type="xs:string"/>
+                <field name="placeref" match="@ref" type="xs:string"/>
+            </create>
+            
+        </range>
+    </index>
+    <triggers>
+        <trigger class="org.exist.extensions.exquery.restxq.impl.RestXqTrigger"/>
+    </triggers>
+</collection>

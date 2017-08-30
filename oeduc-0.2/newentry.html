@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns="http://www.w3.org/1999/xhtml" data-template="templates:surround" data-template-with="templates/page.html" data-template-at="content">
+    <form id="createnew" action="/exist/apps/OEDUc/edit/save-new-entity.xql">
+        <p>Great! So you are creating a new entry!</p>
+        <div class="form-group">
+            <label for="form" class="col-md-2 col-form-label">title</label>
+            <div class="col-md-10">
+                <input class="form-control" id="title" name="title" required="required"/>
+                <small class="form-text text-muted">title</small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="L+text" class="col-md-2 col-form-label">text</label>
+            
+            <div class="col-md-10">
+                <div class="col-md-12">
+                    <button id="underdot" class="btn btn-primary">underdot</button>
+                <button id="abbreviation" class="btn btn-primary">abbreviation</button>
+                <button id="choice" class="btn btn-primary">choice</button>
+                    <button id="linebreak" class="btn btn-primary">linebreak</button>
+                    <button id="supplied" class="btn btn-primary">supplied</button>
+                    <button id="gap" class="btn btn-primary">gap</button>
+            </div>
+                <div class="col-md-12">  <textarea class="form-control" id="L+text" name="L+text" required="required" style="height:250px;">&lt;= 1. =&gt; </textarea>
+                    <small class="form-text text-muted">enter text
+                        <a href="http://papyri.info/docs/leiden_plus">Leiden+ Guidelines</a>
+                    </small>
+                </div>
+                </div>
+        </div>
+        
+        <button id="confirmcreatenew" type="submit" class="btn btn-primary" disabled="disabled">create new entry</button>
+    </form>
+    <script type="text/javascript" src="resources/js/enablecreatenew.js"/>
+    <script type="text/javascript" src="resources/js/buttons.js"/>
+    
+</div>
